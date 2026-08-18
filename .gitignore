@@ -30,3 +30,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# content verification build output (npm run verify:content)
+/.verify-out

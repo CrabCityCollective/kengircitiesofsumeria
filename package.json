@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "verify:content": "tsc -p tsconfig.verify.json && node .verify-out/lib/engine/content/verify.js"
   },
   "dependencies": {
     "next": "^14.2.5",
