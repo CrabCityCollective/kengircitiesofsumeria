@@ -206,8 +206,12 @@ export type SpellEffect =
   | { kind: "permanentMaxLifeBonus"; amount: number }
   /** Permanente bonus op Max Life, en herstel direct alle Life. */
   | { kind: "permanentMaxLifeBonusEnVolledigeHeal"; amount: number }
-  /** Doe onmiddellijk schade aan een tegenstander (Fiend, Godheid of Held). */
-  | { kind: "directeSchade"; amount: number; doelwit: "fiend" | "godheid" | "held" }
+  /**
+   * Doe onmiddellijk schade aan een tegenstander (Fiend, Godheid of Held).
+   * `doelwit` somt de toegestane doelwittypen op; als er meer dan één is,
+   * kiest de castende Held er één bij het casten.
+   */
+  | { kind: "directeSchade"; amount: number; doelwit: Array<"fiend" | "godheid" | "held"> }
   /**
    * Doe schade op afstand (max `bereik` vakken) aan een Fiend, Held of
    * Godheid. `amount` is variabel per aantal ingezette kaarten (vandaar
@@ -228,10 +232,12 @@ export type SpellEffect =
   /**
    * Dwing andere Helden hun kaarten open te spelen; kies daarna één van
    * twee sub-effecten (eenmalige buit, of doorlopend meelezen).
+   * `keuze` is onbepaald in statische spelcontent — de castende Held maakt
+   * deze keuze pas op het moment van casten.
    */
   | {
       kind: "cosmicInsight";
-      keuze: "eenmaligeBuit" | "doorlopendMeelezen";
+      keuze?: "eenmaligeBuit" | "doorlopendMeelezen";
     }
   /** Vernietig een stad permanent. Vereist het bezit van de Tablet. */
   | { kind: "vernietigStad" }
